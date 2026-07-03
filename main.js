@@ -58,10 +58,8 @@
     return result;
   }
 
-  function outputFilename(name) {
-    var dot = name.lastIndexOf('.');
-    if (dot === -1) return name + '.mobile.html';
-    return name.substring(0, dot) + '.mobile' + name.substring(dot);
+  function outputFilename() {
+    return 'index.html';
   }
 
   var convertedHTML = null;
@@ -77,7 +75,7 @@
     var reader = new FileReader();
     reader.onload = function(e) {
       convertedHTML = convert(e.target.result);
-      convertedFilename = outputFilename(file.name);
+      convertedFilename = outputFilename();
 
       fileInfoEl.textContent = file.name + ' \u2192 ' + convertedFilename;
       fileInfoEl.classList.add('visible');
