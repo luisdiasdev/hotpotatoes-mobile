@@ -100,7 +100,7 @@
 
   .download-btn {
     display: none;
-    margin-top: 1em;
+    margin-top: 0.5em;
     width: 100%;
     padding: 0.8em;
     font-size: 1em;
@@ -119,6 +119,54 @@
 
   .download-btn.visible {
     display: block;
+  }
+
+  .filename-group {
+    display: none;
+    margin-top: 1em;
+    text-align: left;
+  }
+
+  .filename-group.visible {
+    display: block;
+  }
+
+  .filename-group label {
+    display: block;
+    font-size: 0.82em;
+    color: #666;
+    margin-bottom: 0.3em;
+  }
+
+  .filename-input {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .filename-input input {
+    flex: 1;
+    padding: 0.6em 0.8em;
+    font-size: 0.95em;
+    border: 1px solid #ccc;
+    border-radius: 0.4em 0 0 0.4em;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .filename-input input:focus {
+    border-color: #4a90d9;
+  }
+
+  .filename-input .ext-suffix {
+    padding: 0.6em 0.8em;
+    font-size: 0.95em;
+    background: #f0f2f5;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 0.4em 0.4em 0;
+    color: #888;
+    white-space: nowrap;
   }
 
   .error {
@@ -172,6 +220,15 @@
   <input type="file" id="fileInput" accept=".htm,.html">
 
   <div class="file-info" id="fileInfo"></div>
+
+  <div class="filename-group" id="filenameGroup">
+    <label for="filenameInput">Output filename</label>
+    <div class="filename-input">
+      <input type="text" id="filenameInput" spellcheck="false">
+      <span class="ext-suffix">.html</span>
+    </div>
+  </div>
+
   <div class="error" id="error"></div>
 
   <button class="download-btn" id="downloadBtn">Download mobile version</button>

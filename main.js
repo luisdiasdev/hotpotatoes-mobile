@@ -58,12 +58,13 @@
     return result;
   }
 
-  function outputFilename() {
-    return 'index.html';
+  function defaultFilename(name) {
+    var dot = name.lastIndexOf('.');
+    var base = dot === -1 ? name : name.substring(0, dot);
+    return base + '.mobile';
   }
 
   var convertedHTML = null;
-  var convertedFilename = null;
 
   function handleFile(file) {
     var ext = file.name.split('.').pop().toLowerCase();
@@ -75,10 +76,11 @@
     var reader = new FileReader();
     reader.onload = function(e) {
       convertedHTML = convert(e.target.result);
-      convertedFilename = outputFilename();
+      filenameInput.value = defaultFilename(file.name);
 
-      fileInfoEl.textContent = file.name + ' \u2192 ' + convertedFilename;
+      fileInfoEl.textContent = file.name;
       fileInfoEl.classList.add('visible');
+      filenameGroupEl.classList.add('visible');
       downloadBtn.classList.add('visible');
       dropzoneEl.classList.add('has-file');
       errorEl.classList.remove('visible');
@@ -95,12 +97,15 @@
   }
 
   function download() {
-    if (!convertedHTML || !convertedFilename) return;
+    if (!convertedHTML) return;
+    var name = filenameInput.value.trim() || 'index';
+    name = name.replace(/\.html?$/i, '');
+    name += '.html';
     var blob = new Blob([convertedHTML], { type: 'text/html;charset=utf-8' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = convertedFilename;
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -110,6 +115,8 @@
   var dropzoneEl = document.getElementById('dropzone');
   var fileInput = document.getElementById('fileInput');
   var fileInfoEl = document.getElementById('fileInfo');
+  var filenameGroupEl = document.getElementById('filenameGroup');
+  var filenameInput = document.getElementById('filenameInput');
   var errorEl = document.getElementById('error');
   var downloadBtn = document.getElementById('downloadBtn');
 
