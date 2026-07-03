@@ -38,11 +38,13 @@ Envie os arquivos `index.html` e `main.js` para o [Netlify Drop](https://app.net
 
 ## Tipos de exercício suportados
 
-- JQuiz (múltipla escolha, resposta curta, híbrido, seleção múltipla)
-- JCloze (lacunas)
-- JMatch (associação, flashcards)
-- JMix (frases embaralhadas)
-- JCross (palavras cruzadas)
+| Tipo | Descrição | Status |
+| --- | --- | --- |
+| JQuiz | Múltipla escolha, resposta curta, híbrido, seleção múltipla | ✅ Testado |
+| JCloze | Lacunas | ⚠️ Não testado |
+| JMatch | Associação, flashcards | ⚠️ Não testado |
+| JMix | Frases embaralhadas | ⚠️ Não testado |
+| JCross | Palavras cruzadas | ⚠️ Não testado |
 
 ## Licença
 

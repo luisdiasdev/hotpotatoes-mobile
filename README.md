@@ -38,11 +38,13 @@ Drop the `index.html` and `main.js` files onto [Netlify Drop](https://app.netlif
 
 ## Supported exercise types
 
-- JQuiz (multiple choice, short answer, hybrid, multi-select)
-- JCloze (gap-fill)
-- JMatch (matching, flashcards)
-- JMix (jumbled sentences)
-- JCross (crosswords)
+| Type | Description | Status |
+| --- | --- | --- |
+| JQuiz | Multiple choice, short answer, hybrid, multi-select | ✅ Tested |
+| JCloze | Gap-fill | ⚠️ Untested |
+| JMatch | Matching, flashcards | ⚠️ Untested |
+| JMix | Jumbled sentences | ⚠️ Untested |
+| JCross | Crosswords | ⚠️ Untested |
 
 ## License
 
