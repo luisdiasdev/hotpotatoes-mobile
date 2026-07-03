@@ -1,5 +1,7 @@
 # Hot Potatoes Mobile Converter
 
+> [Leia em Português](README-pt-BR.md)
+
 Converts [Hot Potatoes](https://hotpot.uvic.ca/) exercise files (JQuiz, JCloze, JMatch, JMix) into mobile-friendly versions — open the page, drop a `.htm` file, and download the converted result.
 
 ## How it works
