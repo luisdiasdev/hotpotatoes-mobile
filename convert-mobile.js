@@ -22,12 +22,16 @@ const MOBILE_CSS = `
 
   #ContainerDiv {
     flex-direction: column !important;
+    margin: 0 !important;
   }
 
   .ExerciseContainer,
   .ReadingContainer {
     min-width: 0 !important;
     width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   button,
@@ -67,21 +71,45 @@ const MOBILE_CSS = `
     overflow-y: auto !important;
   }
 
+  ol.QuizQuestions {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
   ol.MCAnswers {
-    padding-left: 1.5em !important;
-    padding-right: 0.3em !important;
+    padding-left: 1.2em !important;
+    padding-right: 1.2em !important;
   }
 
   ol.MCAnswers li {
     margin-bottom: 1.2em !important;
+    margin-right: 0 !important;
   }
 
   li.QuizQuestion {
-    padding: 0.5em !important;
+    padding: 0.5em 0.3em !important;
+  }
+
+  /* Question navigation: center layout on mobile */
+  .QuestionNavigation p {
+    text-align: center !important;
+  }
+
+  #ShowMethodButton {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 0.6em !important;
+  }
+
+  #OneByOneReadout {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.6em !important;
   }
 
   .QNum {
-    margin: 0 0.3em 0.5em 0.3em !important;
+    margin: 0 !important;
   }
 
   .QuestionText {
@@ -209,6 +237,9 @@ function generateIndex(files, outputDir) {
 <ul>
 ${items}
 </ul>
+<p style="text-align:center;margin-top:2em;font-size:0.85em;color:#888;">
+  <a href="converter.html" style="color:#4a90d9;display:inline;background:none;box-shadow:none;padding:0;">Convert another exercise</a>
+</p>
 </body>
 </html>`;
 
