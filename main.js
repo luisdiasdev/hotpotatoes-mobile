@@ -1,3 +1,4 @@
+/* MIT License — see LICENSE */
 (function(){
   'use strict';
 

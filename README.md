@@ -43,4 +43,4 @@ Drop the `index.html` and `main.js` files onto [Netlify Drop](https://app.netlif
 
 ## License
 
-This project is unlicensed. Hot Potatoes is developed by [Half-Baked Software](https://hotpot.uvic.ca/).
+MIT — see [LICENSE](LICENSE). Hot Potatoes is developed by [Half-Baked Software](https://hotpot.uvic.ca/).
