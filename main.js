@@ -1,192 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hot Potatoes Mobile Converter</title>
-<style>
-  * { box-sizing: border-box; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #f0f2f5;
-    color: #333;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-  }
-
-  .container {
-    background: #fff;
-    border-radius: 1em;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    max-width: 520px;
-    width: 100%;
-    padding: 2em;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 1.4em;
-    margin: 0 0 0.3em;
-    color: #1a1a2e;
-  }
-
-  p.subtitle {
-    color: #666;
-    font-size: 0.9em;
-    margin: 0 0 1.5em;
-  }
-
-  .dropzone {
-    border: 2px dashed #ccc;
-    border-radius: 0.8em;
-    padding: 2.5em 1em;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    position: relative;
-  }
-
-  .dropzone:hover,
-  .dropzone.dragover {
-    border-color: #4a90d9;
-    background: #f4f8fd;
-  }
-
-  .dropzone.has-file {
-    border-color: #4caf50;
-    background: #f1f8f1;
-  }
-
-  .dropzone-icon {
-    font-size: 2.5em;
-    margin-bottom: 0.4em;
-  }
-
-  .dropzone-text {
-    font-size: 0.95em;
-    color: #555;
-  }
-
-  .dropzone-hint {
-    font-size: 0.8em;
-    color: #999;
-    margin-top: 0.4em;
-  }
-
-  input[type="file"] {
-    display: none;
-  }
-
-  .file-info {
-    display: none;
-    margin-top: 1em;
-    padding: 0.8em;
-    background: #f1f8f1;
-    border-radius: 0.5em;
-    font-size: 0.9em;
-    color: #2e7d32;
-    word-break: break-all;
-  }
-
-  .file-info.visible {
-    display: block;
-  }
-
-  .download-btn {
-    display: none;
-    margin-top: 1em;
-    width: 100%;
-    padding: 0.8em;
-    font-size: 1em;
-    background: #4a90d9;
-    color: #fff;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .download-btn:hover {
-    background: #357abd;
-  }
-
-  .download-btn.visible {
-    display: block;
-  }
-
-  .error {
-    display: none;
-    margin-top: 1em;
-    padding: 0.8em;
-    background: #fff0f0;
-    border-radius: 0.5em;
-    color: #c62828;
-    font-size: 0.9em;
-  }
-
-  .error.visible {
-    display: block;
-  }
-
-  .what-it-does {
-    margin-top: 1.5em;
-    font-size: 0.82em;
-    color: #888;
-    line-height: 1.5;
-  }
-
-  .what-it-does strong {
-    color: #666;
-  }
-
-  footer {
-    margin-top: 2em;
-    font-size: 0.78em;
-    color: #aaa;
-  }
-
-  footer a {
-    color: #aaa;
-  }
-</style>
-</head>
-<body>
-
-<div class="container">
-  <h1>Hot Potatoes &rarr; Mobile Converter</h1>
-  <p class="subtitle">Drop a JQuiz / JCloze / JMatch / JMix <code>.htm</code> file to make it mobile-friendly</p>
-
-  <div class="dropzone" id="dropzone">
-    <div class="dropzone-icon">&#x1F4C4;</div>
-    <div class="dropzone-text">Drop your <strong>.htm</strong> file here</div>
-    <div class="dropzone-hint">or click to browse</div>
-  </div>
-
-  <input type="file" id="fileInput" accept=".htm,.html">
-
-  <div class="file-info" id="fileInfo"></div>
-  <div class="error" id="error"></div>
-
-  <button class="download-btn" id="downloadBtn">Download mobile version</button>
-
-  <div class="what-it-does">
-    <strong>What this does:</strong> adds a viewport meta tag, responsive CSS (touch-friendly buttons, stacked layout, fixed feedback modal, balanced margins) &mdash; all without touching your quiz logic.
-  </div>
-</div>
-
-<footer>
-  <a href="index.html">&larr; Back to exercises</a>
-</footer>
-
-<script>
 (function(){
-  const MOBILE_CSS = [
+  'use strict';
+
+  var MOBILE_CSS = [
     '@media (max-width: 600px) {',
     '  body { margin-left: 1% !important; margin-right: 1% !important; }',
     '  .ExerciseTitle { font-size: 120% !important; }',
@@ -214,6 +29,7 @@
     '  div.CardStyle { font-size: 1.2em !important; min-width: 3em !important; padding: 0.7em !important; }',
     '  div.DropLine { width: 90% !important; left: 5% !important; }',
     '  div.ClozeBody { line-height: 1.8 !important; }',
+    '  .QuizQuestion img, .ExerciseContainer img, .StdDiv img { max-width: 100% !important; height: auto !important; }',
     '}',
     '@media (max-width: 600px) {',
     '  input[type="text"], input[type="search"], input:not([type]) { font-size: 16px !important; }',
@@ -221,8 +37,6 @@
   ].join('\n');
 
   var VIEWPORT_META = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-  var convertedHTML = null;
-  var convertedFilename = null;
 
   function hasViewportMeta(html) {
     return /<meta[^>]*name\s*=\s*["']viewport["'][^>]*>/i.test(html);
@@ -249,6 +63,9 @@
     return name.substring(0, dot) + '.mobile' + name.substring(dot);
   }
 
+  var convertedHTML = null;
+  var convertedFilename = null;
+
   function handleFile(file) {
     var ext = file.name.split('.').pop().toLowerCase();
     if (ext !== 'htm' && ext !== 'html') {
@@ -258,15 +75,14 @@
 
     var reader = new FileReader();
     reader.onload = function(e) {
-      var html = e.target.result;
-      convertedHTML = convert(html);
+      convertedHTML = convert(e.target.result);
       convertedFilename = outputFilename(file.name);
 
-      document.getElementById('fileInfo').textContent = file.name + ' \u2192 ' + convertedFilename;
-      document.getElementById('fileInfo').classList.add('visible');
-      document.getElementById('downloadBtn').classList.add('visible');
-      document.getElementById('dropzone').classList.add('has-file');
-      document.getElementById('error').classList.remove('visible');
+      fileInfoEl.textContent = file.name + ' \u2192 ' + convertedFilename;
+      fileInfoEl.classList.add('visible');
+      downloadBtn.classList.add('visible');
+      dropzoneEl.classList.add('has-file');
+      errorEl.classList.remove('visible');
     };
     reader.onerror = function() {
       showError('Could not read the file. Please try again.');
@@ -275,8 +91,8 @@
   }
 
   function showError(msg) {
-    document.getElementById('error').textContent = msg;
-    document.getElementById('error').classList.add('visible');
+    errorEl.textContent = msg;
+    errorEl.classList.add('visible');
   }
 
   function download() {
@@ -292,35 +108,34 @@
     URL.revokeObjectURL(url);
   }
 
-  var dropzone = document.getElementById('dropzone');
+  var dropzoneEl = document.getElementById('dropzone');
   var fileInput = document.getElementById('fileInput');
+  var fileInfoEl = document.getElementById('fileInfo');
+  var errorEl = document.getElementById('error');
+  var downloadBtn = document.getElementById('downloadBtn');
 
-  dropzone.addEventListener('click', function() { fileInput.click(); });
+  dropzoneEl.addEventListener('click', function() { fileInput.click(); });
 
   fileInput.addEventListener('change', function() {
     if (this.files && this.files[0]) handleFile(this.files[0]);
   });
 
-  dropzone.addEventListener('dragover', function(e) {
+  dropzoneEl.addEventListener('dragover', function(e) {
     e.preventDefault();
-    dropzone.classList.add('dragover');
+    dropzoneEl.classList.add('dragover');
   });
 
-  dropzone.addEventListener('dragleave', function() {
-    dropzone.classList.remove('dragover');
+  dropzoneEl.addEventListener('dragleave', function() {
+    dropzoneEl.classList.remove('dragover');
   });
 
-  dropzone.addEventListener('drop', function(e) {
+  dropzoneEl.addEventListener('drop', function(e) {
     e.preventDefault();
-    dropzone.classList.remove('dragover');
+    dropzoneEl.classList.remove('dragover');
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       handleFile(e.dataTransfer.files[0]);
     }
   });
 
-  document.getElementById('downloadBtn').addEventListener('click', download);
+  downloadBtn.addEventListener('click', download);
 })();
-</script>
-
-</body>
-</html>
