@@ -4,6 +4,8 @@
 
 Converte arquivos de exercício do [Hot Potatoes](https://hotpot.uvic.ca/) (JQuiz, JCloze, JMatch, JMix) em versões otimizadas para dispositivos móveis — abra a página, solte um arquivo `.htm` e baixe o resultado convertido.
 
+**Experimente:** [luisdiasdev.github.io/hotpotatoes-mobile](https://luisdiasdev.github.io/hotpotatoes-mobile/)
+
 ## Como funciona
 
 1. **Insere** `<meta name="viewport">` — a principal correção para renderização em telas menores.
@@ -30,10 +32,9 @@ Envie os arquivos `index.html` e `main.js` para o [Netlify Drop](https://app.net
 ## Arquivos
 
 | Arquivo | Função |
-|---|---|
+| --- | --- |
 | `index.html` | Interface do conversor (área de upload + botão de download) |
 | `main.js` | Lógica de conversão e interação com o navegador |
-| `input/` | (ignorado pelo git) Coloque seus arquivos `.htm` originais aqui |
 
 ## Tipos de exercício suportados
 

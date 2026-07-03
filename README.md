@@ -4,6 +4,8 @@
 
 Converts [Hot Potatoes](https://hotpot.uvic.ca/) exercise files (JQuiz, JCloze, JMatch, JMix) into mobile-friendly versions — open the page, drop a `.htm` file, and download the converted result.
 
+**Try it:** [luisdiasdev.github.io/hotpotatoes-mobile](https://luisdiasdev.github.io/hotpotatoes-mobile/)
+
 ## How it works
 
 1. **Injects** `<meta name="viewport">` — the single biggest fix for mobile rendering.
@@ -30,10 +32,9 @@ Drop the `index.html` and `main.js` files onto [Netlify Drop](https://app.netlif
 ## Files
 
 | File | Purpose |
-|---|---|
+| --- | --- |
 | `index.html` | Converter UI (drop zone + download button) |
 | `main.js` | Conversion logic and browser interaction |
-| `input/` | (gitignored) Drop your original `.htm` files here |
 
 ## Supported exercise types
 
